@@ -6,7 +6,7 @@
             "id": "3604d316-1400-44b5-93cc-4bd8f59dfbf8",
             "actions": [
                 {
-                    "name": "Grow",
+                    "name": "Jump",
                     "type": "Button",
                     "id": "f90e2190-68c9-40f5-88a4-c0802e3bab99",
                     "expectedControlType": "Button",
@@ -41,7 +41,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "Grow",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -52,7 +52,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Grow",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

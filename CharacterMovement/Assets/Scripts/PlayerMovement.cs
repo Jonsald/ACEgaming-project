@@ -11,18 +11,18 @@ public class PlayerMovement : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
     public Transform cam;
+    public float gravity = -9.81f;
 
     Animator anim;
     Vector2 move;
     Vector2 rotate;
+    Vector3 velocity;
 
     void Awake()
     {
         anim = GetComponent<Animator>();    
 
         controls = new PlayerControls();
-
-        // controls.Gameplay.Grow.performed += ctx => Grow();
 
         controls.Gameplay.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
         controls.Gameplay.Move.performed += ctx => Walk();
@@ -34,27 +34,8 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    // void Grow() 
-    // {
-    //     transform.localScale *= 1.1f;
-    // }
-
     void Update()
     {
-        // var keyboard = Keyboard.current;
-        // if (keyboard != null)
-        // {
-        //     if (keyboard.fKey.wasPressedThisFrame)
-        //     {
-        //         anim.SetTrigger("Fight");
-        //     }
-
-        //     if (keyboard.iKey.wasPressedThisFrame)
-        //     {
-        //         anim.SetTrigger("Idle");
-        //     }
-        // }
-
         Vector3 direction = new Vector3(move.x, 0f, move.y).normalized;
 
         if(direction.magnitude >= 0.1f)
@@ -66,6 +47,9 @@ public class PlayerMovement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
         }
+
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
     }
 
     void OnEnable() 

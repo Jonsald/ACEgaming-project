@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enviroment
+  - MoveableBox
   layers:
   - Default
   - TransparentFX
