@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     Rigidbody rb;
     private bool isJump = false;
+    private bool isSprint = false;
     private float canJump;
     private float canJumpCD = -1f;
 
@@ -32,6 +33,9 @@ public class PlayerMovement : MonoBehaviour
         canJump = jumpforce / 2.5f;//might need to change depending on jumpforce
 
         controls.Gameplay.Jump.performed += ctx => isJump = true;
+
+        controls.Gameplay.Sprint.performed += ctx => isSprint = true;
+        controls.Gameplay.Sprint.canceled += ctx => isSprint = false;
 
         controls.Gameplay.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
         controls.Gameplay.Move.performed += ctx => Walk();
@@ -55,7 +59,18 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);//rotate character
 
             Vector3 moveDir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);//move character
+            float movSpd = 0f;
+
+            if(isSprint)
+            {
+                movSpd = sprintSpeed;
+            }
+            else
+            {
+                movSpd = speed; 
+            }
+
+            controller.Move(moveDir.normalized * movSpd * Time.deltaTime);//move character
         }
         //gravity
         velocity.y += gravity * Time.deltaTime;
