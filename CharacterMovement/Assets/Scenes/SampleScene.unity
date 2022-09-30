@@ -629,6 +629,8 @@ MonoBehaviour:
   turnSmoothTime: 0.1
   cam: {fileID: 963194228}
   gravity: -9.81
+  sprintSpeed: 12
+  jumpforce: 4
 --- !u!143 &457690232
 CharacterController:
   m_ObjectHideFlags: 0
