@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enviroment
   - MoveableBox
+  - HealthPack
+  - Enemy
   layers:
   - Default
   - TransparentFX
